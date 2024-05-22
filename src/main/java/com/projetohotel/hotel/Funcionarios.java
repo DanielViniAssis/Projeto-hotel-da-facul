@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Funcionarios implements Interfacefuncionarios{
@@ -38,7 +39,8 @@ public class Funcionarios implements Interfacefuncionarios{
     //funções da interface
         
         public static Funcionarios incluirFuncionario() {
-            try (Scanner leitura = new Scanner(System.in)) {
+            Scanner leitura = new Scanner(System.in);
+            try {
                 System.out.println("Digite o seu nome: ");
                 String nome = leitura.nextLine();
                 
@@ -46,7 +48,12 @@ public class Funcionarios implements Interfacefuncionarios{
                 String cargo = leitura.next();
       
                 return new Funcionarios(nome, cargo);
-            } 
+            } catch (NoSuchElementException e) {
+                System.out.println("Entrada inválida, tente novamente.");
+                e.printStackTrace();}
+                finally {
+                }
+            return null;
         }
         
         @Override
