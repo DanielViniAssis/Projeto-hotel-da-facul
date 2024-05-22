@@ -1,4 +1,5 @@
-package projetohotel.hotel;
+package com.projetohotel.hotel;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

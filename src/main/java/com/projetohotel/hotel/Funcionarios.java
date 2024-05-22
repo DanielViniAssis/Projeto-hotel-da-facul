@@ -34,14 +34,15 @@ public class Funcionarios implements Interfacefuncionarios{
         public void setCargo(String cargo){
             this.cargo = cargo;
         }
+    
     //funções da interface
         
         public static Funcionarios incluirFuncionario() {
             try (Scanner leitura = new Scanner(System.in)) {
-                System.out.println("Digite o nome do funcionario: ");
+                System.out.println("Digite o seu nome: ");
                 String nome = leitura.nextLine();
                 
-                System.out.println("Digite o cargo do funcionario: ");
+                System.out.println("Digite o seu cargo: ");
                 String cargo = leitura.next();
       
                 return new Funcionarios(nome, cargo);
