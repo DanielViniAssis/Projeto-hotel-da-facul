@@ -40,8 +40,11 @@ public class HotelMenu {
         do {
             System.out.println("-----------Hotel------------");
             System.out.println("1. Opções de Cliente");
-            System.out.println("2. Adicionar um funcionario");
-            System.out.println("3. Sair");
+            System.out.println("2. Opções dos Quartos");
+            System.out.println("3. Opções dos Funcionarios");
+            System.out.println("4. Opções das Reservas");
+            System.out.println("5. Voltar um Menu");
+            System.out.println("6. Sair");
             System.out.print("Escolha uma opção: ");
             while (!leitura.hasNextInt()) {
                 System.out.println("Opção inválida. Tente novamente.");
@@ -56,11 +59,15 @@ public class HotelMenu {
                 case 2:
                     System.out.println("Saindo...");
                     break;
+                case 5:
+                    System.out.println("Voltando....");
+                    areaFuncionario();
+                    break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
                     break;
                 }
-            } while (opcaoMenu != 2);
+            } while (opcaoMenu != 6);
         leitura.close();
     }
 
