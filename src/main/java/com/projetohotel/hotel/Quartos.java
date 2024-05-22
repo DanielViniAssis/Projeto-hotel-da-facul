@@ -30,7 +30,7 @@ public class Quartos implements InterfaceQuartos{
         this.status_quarto = status;
     }
     @Override
-    public void adicionarQuarto(Quartos quarto) {
+    public void tipoQuarto (Quartos quarto) {
         throw new UnsupportedOperationException("Unimplemented method 'adicionarQuarto'");
     }
     @Override

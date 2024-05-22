@@ -20,7 +20,7 @@ public interface InterfaceHotel {
     }
      interface InterfaceQuartos {
         //funções para os quartos
-         void adicionarQuarto(Quartos quarto);
+         void tipoQuarto(Quartos quarto);
         List<Quartos> listarTodosQuartos();
         Quartos encontrarQuarto(int numeroQuarto);
     }
