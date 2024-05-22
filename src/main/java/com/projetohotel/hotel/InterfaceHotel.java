@@ -24,9 +24,4 @@ public interface InterfaceHotel {
         List<Quartos> listarTodosQuartos();
         Quartos encontrarQuarto(int numeroQuarto);
     }
-     interface InterfaceServicos {
-        // funções para os serviços PRECISAMOS VER COMO FAZER
-         void limpezaFeita();
-         void servicoDeQuartoFeita();
-    }
 }
