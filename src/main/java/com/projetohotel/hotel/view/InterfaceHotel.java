@@ -1,6 +1,10 @@
-package com.projetohotel.hotel;
+package com.projetohotel.hotel.view;
 
 import java.util.List;
+
+import com.projetohotel.hotel.model.Clientes;
+import com.projetohotel.hotel.model.Funcionarios;
+import com.projetohotel.hotel.model.Quartos;
 
 public interface InterfaceHotel {
      interface Interfacefuncionarios {
@@ -8,7 +12,7 @@ public interface InterfaceHotel {
          void removerFuncionario(Funcionarios funcionario);
          void adicionarFuncionario(Funcionarios funcionario);
         List<Funcionarios> listarTodosFuncionarios();
-        Funcionarios encontrarFuncionarioPorId(int id_funcionario);
+        Funcionarios encontrarFuncionarioPorNome(int nomeFuncionario);
     }
 
      //funções para o cliente
@@ -16,7 +20,7 @@ public interface InterfaceHotel {
          void adicionarCliente(Clientes cliente);
          void removerCliente(Clientes cliente);
         List<Clientes> listarTodosClientes();
-        Clientes encontrarClientePorId(int id_cliente);
+        Clientes encontrarClientePorCpf(int cpf);
     }
      interface InterfaceQuartos {
         //funções para os quartos

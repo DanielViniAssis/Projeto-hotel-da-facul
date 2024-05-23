@@ -1,4 +1,4 @@
-package com.projetohotel.hotel;
+package com.projetohotel.hotel.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.projetohotel.hotel.config.DatabaseConnection;
 
 public class Reserva {
     private int idReserva;
@@ -210,7 +212,7 @@ public class Reserva {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    } 
 
     public static void listagem() {
         Reserva reserva = new Reserva(0, 0, 0, "", 0, 0, "", "", null, null, 0, "", 0);

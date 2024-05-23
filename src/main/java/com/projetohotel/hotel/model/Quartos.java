@@ -1,8 +1,8 @@
-package com.projetohotel.hotel;
+package com.projetohotel.hotel.model;
 
 import java.util.List;
 
-import com.projetohotel.hotel.InterfaceHotel.InterfaceQuartos;
+import com.projetohotel.hotel.view.InterfaceHotel.InterfaceQuartos;
 
 public class Quartos implements InterfaceQuartos{
     public String tipo_quarto;

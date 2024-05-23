@@ -1,6 +1,11 @@
-package com.projetohotel.hotel;
+package com.projetohotel.hotel.view;
+
+import com.projetohotel.hotel.controller.ClientesController;
+import com.projetohotel.hotel.model.Funcionarios;
+import com.projetohotel.hotel.repository.ClientesRepository;
 
 import java.util.Scanner;
+
 
 public class HotelMenu {
     
@@ -33,7 +38,7 @@ public class HotelMenu {
     }
     public static void main(String[] args) {
         areaFuncionario();
-
+        
         Scanner leitura = new Scanner(System.in);
         int opcaoMenu;
         
@@ -72,13 +77,14 @@ public class HotelMenu {
     }
 
     public static void menuCliente(Scanner leitura) {
+        ClientesController ClientesController = new ClientesController(new ClientesRepository());
         int opcaoCliente = 0;  
         do {
             System.out.println("-------------Menu Cliente-------------");
             System.out.println("1. Listar Todos os Clientes");
             System.out.println("2. Remover Cliente");
             System.out.println("3. Encontrar Cliente por ID");
-            System.out.println("4. Voltar ao Menu Principal");
+            System.out.println("4. Voltar Um Menu");
             System.out.print("Escolha uma opção: ");
         
             opcaoCliente = leitura.nextInt(); 
@@ -86,19 +92,20 @@ public class HotelMenu {
                 
                 switch (opcaoCliente) {
                     case 1:
-                        Clientes.listagem();
-                        continue;
+                        ClientesController.listarTodosClientes();
+                        continue;   
                     case 2:
-                        Clientes.clienteRemovido();
+                        ClientesController.removerCliente();
                         break;
                     case 3:
-                        Clientes.clienteEncontrado();
+                        ClientesController.encontrarClientePorCpf();
                 }
             } while (opcaoCliente != 4);
             leitura.close();
         }
 
     public static void menuReservas(Scanner leitura){
+        ClientesController ClientesController = new ClientesController(new ClientesRepository());
         int opcaoRerseva;
         
         do{
@@ -110,10 +117,7 @@ public class HotelMenu {
             
             switch (opcaoRerseva) {
                 case 1:
-                    Clientes cliente = Clientes.cadastroCliente();
-                    if (cliente != null) {
-                        cliente.adicionarCliente(cliente);
-                    }
+                    ClientesController.adicionarCliente();
                     break;
                 
                 }
