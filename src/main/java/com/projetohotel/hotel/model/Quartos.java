@@ -1,45 +1,50 @@
 package com.projetohotel.hotel.model;
 
-import java.util.List;
-
-import com.projetohotel.hotel.view.InterfaceHotel.InterfaceQuartos;
-
-public class Quartos implements InterfaceQuartos{
-    public String tipo_quarto;
-    public String status_quarto;
+public class Quartos{
+    public int idQuarto;
+    public String tipoQuarto;
+    public int numeroQuarto;
+    public String statusQuarto;
     
-    public Quartos(String tipo, String status){
-        this.tipo_quarto = tipo;
-        this.status_quarto = status;
+    public Quartos(int idQuarto, String tipo, int numeroQuarto, String status){
+        this.idQuarto = idQuarto;
+        this.numeroQuarto = numeroQuarto;
+        this.tipoQuarto = tipo;
+        this.statusQuarto = status;
     }
     // getters
-    public String getTipo(){
-        return tipo_quarto;
+    public int getIdQuarto(){
+        return idQuarto;
     }
     
+    public String getTipo(){
+        return tipoQuarto;
+    }
+    
+    public int getNumeroQuarto(){
+        return numeroQuarto;
+    }
+
     public String getStatus(){
-        return status_quarto;
+        return statusQuarto;
     }
     
     //set para editar dados
+    public void setIdQuarto(int idQuarto){
+        this.idQuarto = idQuarto;
+    }
+
     public void setTipo(String tipo){
-        this.tipo_quarto = tipo;
+        this.tipoQuarto = tipo;
+    }
+
+    public void setNumeroQuarto(int numeroQuarto){
+        this.numeroQuarto = numeroQuarto;
     }
 
     public void setStatus(String status){
-        this.status_quarto = status;
+        this.statusQuarto = status;
     }
-    @Override
-    public void tipoQuarto (Quartos quarto) {
-        throw new UnsupportedOperationException("Unimplemented method 'adicionarQuarto'");
-    }
-    @Override
-    public List<Quartos> listarTodosQuartos() {
-        throw new UnsupportedOperationException("Unimplemented method 'listarTodosQuartos'");
-    }
-    @Override
-    public Quartos encontrarQuarto(int numeroQuarto) {
-        throw new UnsupportedOperationException("Unimplemented method 'encontrarQuarto'");
-    }
+
 
 }

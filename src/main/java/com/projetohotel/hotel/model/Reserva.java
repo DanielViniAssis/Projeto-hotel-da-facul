@@ -1,5 +1,9 @@
 package com.projetohotel.hotel.model;
 
+import com.projetohotel.hotel.config.DatabaseConnection;
+import com.projetohotel.hotel.model.Clientes;
+import com.projetohotel.hotel.model.Funcionarios;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,40 +12,39 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.projetohotel.hotel.config.DatabaseConnection;
-
 public class Reserva {
     private int idReserva;
-    private int idCliente;
+    private Clientes cliente;
     private int cpf;
     private String nomeCliente;
     private int telefone;
-    private int idQuarto;
+    private Quartos quarto;
     private String tipoQuarto;
+    private int numeroQuarto;
     private String statusQuarto;
-    private Date dataEntrada;
-    private Date dataSaida;
-    private int idFuncionario;
+    private int dataEntrada;
+    private int dataSaida;
+    private Funcionarios funcionario;
     private String nomeFuncionario;
-    private int status;
+    private String status;
 
- public Reserva(int idReserva, int idCliente, int cpf, String nomeCliente, int telefone, int idQuarto, String tipoQuarto, String statusQuarto, Date dataEntrada, Date dataSaida, int idFuncionario, String nomeFuncionario, int status) {
+    public Reserva(int idReserva, Clientes cliente, int cpf, String nomeCliente, int telefone, Quartos quarto, String tipoQuarto, int numeroQuarto, String statusQuarto, int dataEntrada, int dataSaida, Funcionarios funcionario, String nomeFuncionario, String status) {
         this.idReserva = idReserva;
-        this.idCliente = idCliente;
+        this.cliente = cliente;
         this.cpf = cpf;
         this.nomeCliente = nomeCliente;
         this.telefone = telefone;
-        this.idQuarto = idQuarto;
+        this.quarto = quarto;
         this.tipoQuarto = tipoQuarto;
+        this.numeroQuarto = numeroQuarto;
         this.statusQuarto = statusQuarto;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
-        this.idFuncionario = idFuncionario;
+        this.funcionario = funcionario;
         this.nomeFuncionario = nomeFuncionario;
         this.status = status;
     }
-
-    // Getters e Setters para todos os campos
+    // Getters e Setters 
     public int getIdReserva() {
         return idReserva;
     }
@@ -50,12 +53,12 @@ public class Reserva {
         this.idReserva = idReserva;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public Clientes getCliente() {
+        return cliente;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setCliente(Clientes cliente) {
+        this.cliente = cliente;
     }
 
     public int getCpf() {
@@ -66,7 +69,7 @@ public class Reserva {
         this.cpf = cpf;
     }
 
-    public String getNomeCliente() {
+    public String getNome() {
         return nomeCliente;
     }
 
@@ -82,12 +85,12 @@ public class Reserva {
         this.telefone = telefone;
     }
 
-    public int getIdQuarto() {
-        return idQuarto;
+    public Quartos getQuarto() {
+        return quarto;
     }
 
-    public void setIdQuarto(int idQuarto) {
-        this.idQuarto = idQuarto;
+    public void setQuarto(Quartos quarto) {
+        this.quarto = quarto;
     }
 
     public String getTipoQuarto() {
@@ -98,6 +101,14 @@ public class Reserva {
         this.tipoQuarto = tipoQuarto;
     }
 
+    public int getNumeroQuarto() {
+        return numeroQuarto;
+    }
+
+    public void setNumeroQuarto(int numeroQuarto) {
+        this.numeroQuarto = numeroQuarto;
+    }
+
     public String getStatusQuarto() {
         return statusQuarto;
     }
@@ -106,28 +117,28 @@ public class Reserva {
         this.statusQuarto = statusQuarto;
     }
 
-    public Date getDataEntrada() {
+    public int getDataEntrada() {
         return dataEntrada;
     }
 
-    public void setDataEntrada(Date dataEntrada) {
+    public void setDataEntrada(int dataEntrada) {
         this.dataEntrada = dataEntrada;
     }
 
-    public Date getDataSaida() {
+    public int getDataSaida() {
         return dataSaida;
     }
 
-    public void setDataSaida(Date dataSaida) {
+    public void setDataSaida(int dataSaida) {
         this.dataSaida = dataSaida;
     }
 
-    public int getIdFuncionario() {
-        return idFuncionario;
+    public Funcionarios getFuncionario() {
+        return funcionario;
     }
 
-    public void setIdFuncionario(int idFuncionario) {
-        this.idFuncionario = idFuncionario;
+    public void setFuncionario(Funcionarios funcionario) {
+        this.funcionario = funcionario;
     }
 
     public String getNomeFuncionario() {
@@ -138,15 +149,14 @@ public class Reserva {
         this.nomeFuncionario = nomeFuncionario;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    // Método para listar todas as reservas
     public List<Reserva> listarTodasReservas() {
         List<Reserva> listaReservas = new ArrayList<>();
         String sql = "SELECT * FROM reserva";
@@ -158,18 +168,19 @@ public class Reserva {
             while (resultSet.next()) {
                 Reserva reserva = new Reserva(
                     resultSet.getInt("id_reserva"),
-                    resultSet.getInt("id_cliente"),
+                    null,
                     resultSet.getInt("cpf"),
                     resultSet.getString("nome_cliente"),
                     resultSet.getInt("telefone"),
-                    resultSet.getInt("id_quarto"),
+                    null, 
                     resultSet.getString("tipo_quarto"),
+                    resultSet.getInt("numero_quarto"),
                     resultSet.getString("status_quarto"),
-                    resultSet.getDate("data_entrada"),
-                    resultSet.getDate("data_saida"),
-                    resultSet.getInt("id_funcionario"),
+                    resultSet.getInt("data_entrada"),
+                    resultSet.getInt("data_saida"),
+                    null, 
                     resultSet.getString("nome_funcionario"),
-                    resultSet.getInt("status")
+                    resultSet.getString("status")
                 );
                 listaReservas.add(reserva);
             }
@@ -185,23 +196,24 @@ public class Reserva {
     }
 
     public void adicionarReserva(Reserva reserva) {
-        String sql = "INSERT INTO reserva (id_cliente, cpf, nome_cliente, telefone, id_quarto, tipo_quarto, status_quarto, data_entrada, data_saida, id_funcionario, nome_funcionario, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO reserva (id_cliente, cpf, nome_cliente, telefone, id_quarto, tipo_quarto, numero_quarto,  status_quarto, data_entrada, data_saida, id_funcionario, nome_funcionario, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setInt(1, reserva.getIdCliente());
+            statement.setInt(1, reserva.getCliente().getIdCliente());
             statement.setInt(2, reserva.getCpf());
-            statement.setString(3, reserva.getNomeCliente());
+            statement.setString(3, reserva.getNome());
             statement.setInt(4, reserva.getTelefone());
-            statement.setInt(5, reserva.getIdQuarto());
+            statement.setInt(5, reserva.getQuarto().getIdQuarto());
             statement.setString(6, reserva.getTipoQuarto());
+            statement.setInt(6, reserva.getNumeroQuarto());
             statement.setString(7, reserva.getStatusQuarto());
-            statement.setDate(8, new java.sql.Date(reserva.getDataEntrada().getTime()));
-            statement.setDate(9, new java.sql.Date(reserva.getDataSaida().getTime()));
-            statement.setInt(10, reserva.getIdFuncionario());
+            statement.setInt(8,  reserva.getDataEntrada());
+            statement.setInt(9,  reserva.getDataSaida());
+            statement.setInt(10, reserva.getFuncionario().getIdFuncionario());
             statement.setString(11, reserva.getNomeFuncionario());
-            statement.setInt(12, reserva.getStatus());
+            statement.setString(12, reserva.getStatus());
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
@@ -215,14 +227,14 @@ public class Reserva {
     } 
 
     public static void listagem() {
-        Reserva reserva = new Reserva(0, 0, 0, "", 0, 0, "", "", null, null, 0, "", 0);
+        Reserva reserva = new Reserva(0, null, 0, "", 0, null, "", 0, "", 0, 0, null, "", "");
         List<Reserva> listaReservas = reserva.listarTodasReservas();
         for (Reserva r : listaReservas) {
             System.out.println("Id da Reserva: " + r.getIdReserva());
-            System.out.println("Cliente: " + r.getNomeCliente());
+            System.out.println("Cliente: " + r.getNome());
             System.out.println("CPF: " + r.getCpf());
             System.out.println("Telefone: " + r.getTelefone());
-            System.out.println("Quarto: " + r.getIdQuarto() + " - " + r.getTipoQuarto() + " - " + r.getStatusQuarto());
+            System.out.println("Quarto: " + r.getQuarto() + " - " + r.getTipoQuarto() + " - " + r.getNumeroQuarto() + " - " + r.getStatusQuarto());
             System.out.println("Data de Entrada: " + r.getDataEntrada());
             System.out.println("Data de Saída: " + r.getDataSaida());
             System.out.println("Funcionário: " + r.getNomeFuncionario());

@@ -58,17 +58,17 @@ public class FuncionariosRepository implements Interfacefuncionarios {
         }
         return listaFuncioanrios;
         
-}
+    }
     
     @Override
-    public Funcionarios encontrarFuncionarioPorNome(int nomeFuncionario) {
+    public Funcionarios encontrarFuncionarioPorNome(String nomeFuncionario) {
         Funcionarios funcionario = null;
         String sql = "SELECT * FROM funcionarios WHERE nome_funcionario = ?";
         
         try (Connection conexao = DatabaseConnection.getConnection();
             PreparedStatement statement = conexao.prepareStatement(sql)) {
             
-            statement.setInt(1, nomeFuncionario);
+            statement.setString(1, nomeFuncionario);
             ResultSet resultSet = statement.executeQuery();
             
             if (resultSet.next()) {
@@ -87,24 +87,23 @@ public class FuncionariosRepository implements Interfacefuncionarios {
 
     @Override
     public void removerFuncionario(Funcionarios funcionario) {
-    String sql = "DELETE FROM funcionarios WHERE id_funcionario = ? AND nome_funcionario = ? AND cargo = ?";
+    String sql = "DELETE FROM funcionarios WHERE nome_funcionario = ?";
     
-    try (Connection conexao = DatabaseConnection.getConnection();
-        PreparedStatement statement = conexao.prepareStatement(sql)) {
+        try (Connection conexao = DatabaseConnection.getConnection();
+            PreparedStatement statement = conexao.prepareStatement(sql)) {
 
-            statement.setString(1, funcionario.getNome());
-            statement.setString(2, funcionario.getCargo());
-    
-        int rowsAffected = statement.executeUpdate();
-        if (rowsAffected > 0) {
-            System.out.println("Funcionario removido com sucesso!");
-        } else {
-            System.out.println("Falha ao remover o Funcionario ou Funcionario não encontrado.");
+                statement.setString(1, funcionario.getNome());
+        
+                int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Funcionario removido com sucesso!");
+            } else {
+                System.out.println("Falha ao remover o Funcionario ou Funcionario não encontrado.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao tentar remover Funcionario: ");
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        System.err.println("Erro ao tentar remover Funcionario: ");
-        e.printStackTrace();
     }
-}
   
 }

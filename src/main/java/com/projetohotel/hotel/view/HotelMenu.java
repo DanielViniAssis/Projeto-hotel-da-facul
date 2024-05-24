@@ -1,8 +1,11 @@
 package com.projetohotel.hotel.view;
 
 import com.projetohotel.hotel.controller.ClientesController;
-import com.projetohotel.hotel.model.Funcionarios;
+import com.projetohotel.hotel.controller.FuncionariosController;
+import com.projetohotel.hotel.controller.QuartosController;
 import com.projetohotel.hotel.repository.ClientesRepository;
+import com.projetohotel.hotel.repository.FuncionariosRepository;
+import com.projetohotel.hotel.repository.QuartosRepository;
 
 import java.util.Scanner;
 
@@ -10,31 +13,41 @@ import java.util.Scanner;
 public class HotelMenu {
     
     public static void areaFuncionario(){
+        FuncionariosController FuncionariosController = new FuncionariosController(new FuncionariosRepository());
         Scanner leitura = new Scanner(System.in);
         int opcaoFuncionario;
         do{
             System.out.println("-----------Área do funcionario------------");
             System.out.println("1. Login funcionario");
-            System.out.println("2. Entrar no menu de reservas");
-            System.out.println("3. Entrar no menu do hotel");
+            System.out.println("2. Listar todos os funcionario");
+            System.out.println("3. Buscar funcionario");
+            System.out.println("4. Remover funcionario");
+            System.out.println("5. Entrar no menu de reservas");
+            System.out.println("6. Entrar no menu do hotel");
             System.out.println("Escolha a opção: ");
             
             opcaoFuncionario = leitura.nextInt();
             leitura.nextLine();
             switch (opcaoFuncionario){
                 case 1: 
-                    Funcionarios funcionario = Funcionarios.incluirFuncionario();
-                        if (funcionario != null) {
-                            funcionario.adicionarFuncionario(funcionario);
-                        }
+                    FuncionariosController.adicionarFuncionario();
                     break;
-                case 2:
+                case 2: 
+                    FuncionariosController.listarTodosFuncionarios();
+                break;
+                case 3: 
+                    FuncionariosController.encontrarFuncionarioPorNome();
+                    break;
+                case 4: 
+                    FuncionariosController.removerFuncionario();
+                    break;
+                case 5:
                     menuReservas(leitura);
                     break;
-                case 3:
+                case 6:
                     break;
             }
-        } while (opcaoFuncionario != 3);
+        } while (opcaoFuncionario != 6);
     }
     public static void main(String[] args) {
         areaFuncionario();
@@ -106,11 +119,14 @@ public class HotelMenu {
 
     public static void menuReservas(Scanner leitura){
         ClientesController ClientesController = new ClientesController(new ClientesRepository());
+        QuartosController QuartosController = new QuartosController(new QuartosRepository());
+        
         int opcaoRerseva;
         
         do{
             System.out.println("----------Menu Reservas----------");
             System.out.println("1. Cadastrar Cliente");
+            System.out.println("2. Reservar Quarto");
            
             opcaoRerseva = leitura.nextInt();
             leitura.nextLine();
@@ -119,6 +135,11 @@ public class HotelMenu {
                 case 1:
                     ClientesController.adicionarCliente();
                     break;
+                case 2:
+                    QuartosController.adicionarTipoQuarto();
+                    break;
+                case 3:
+                break;
                 
                 }
         }while (opcaoRerseva != 5);

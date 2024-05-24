@@ -7,12 +7,13 @@ import com.projetohotel.hotel.model.Funcionarios;
 import com.projetohotel.hotel.model.Quartos;
 
 public interface InterfaceHotel {
+
      interface Interfacefuncionarios {
         // funções para o funcionario
          void removerFuncionario(Funcionarios funcionario);
          void adicionarFuncionario(Funcionarios funcionario);
         List<Funcionarios> listarTodosFuncionarios();
-        Funcionarios encontrarFuncionarioPorNome(int nomeFuncionario);
+        Funcionarios encontrarFuncionarioPorNome(String nomeFuncionario);
     }
 
      //funções para o cliente
@@ -24,8 +25,9 @@ public interface InterfaceHotel {
     }
      interface InterfaceQuartos {
         //funções para os quartos
-         void tipoQuarto(Quartos quarto);
+         void adicionarTipoQuarto(Quartos quarto);
         List<Quartos> listarTodosQuartos();
-        Quartos encontrarQuarto(int numeroQuarto);
+        Quartos encontrarQuartoPorNumero(int numeroQuarto);
+        void removerQuartos(Quartos quarto);
     }
 }
