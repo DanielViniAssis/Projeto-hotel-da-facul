@@ -14,7 +14,7 @@ public class Funcionarios{
     public int getIdFuncionario(){
         return idFuncionario;
     }
-    public String getNome(){
+    public String getNomeFuncionario(){
         return nomeFuncionario;
     }
     

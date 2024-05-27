@@ -4,7 +4,6 @@ import com.projetohotel.hotel.model.Clientes;
 import com.projetohotel.hotel.repository.ClientesRepository;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -12,40 +11,26 @@ import java.util.NoSuchElementException;
 public class ClientesController {
     private final ClientesRepository clientesRepository;
 
-    public ClientesController(ClientesRepository clientesRepository){
+    public ClientesController(ClientesRepository clientesRepository) {
         this.clientesRepository = clientesRepository;
-     }
-
-    public  void adicionarCliente() {
-        Scanner leitura = new Scanner(System.in);
-        try{
-            System.out.println("Digite o nome do cliente: ");
-            String nome = leitura.nextLine();
-            
-            System.out.println("Digite o CPF do cliente: ");
-            while (!leitura.hasNextInt()) {
-                System.out.println("CPF inválido. Certifique-se de digitar apenas números.");
-                leitura.nextInt();
-            }
-            int cpf = leitura.nextInt();
-            
-            
-            System.out.println("Digite o Telefone do cliente: ");
-            while (!leitura.hasNextInt()) {
-                System.out.println("Telefone inválido. Certifique-se de digitar apenas números.");
-                leitura.nextInt();
-            }
-            int telefone = leitura.nextInt();
-            
-            Clientes novoCliente = new Clientes(0, nome, cpf, telefone);
-            clientesRepository.adicionarCliente(novoCliente);
-
-        }catch (NoSuchElementException e) {
-            System.out.println("Entrada inválida, tente novamente.");
-            e.printStackTrace();
-        }
     }
 
+    public Clientes adicionarCliente() {
+        Scanner leitura = new Scanner(System.in);
+        System.out.println("Digite o nome do cliente: ");
+        String nome = leitura.nextLine();
+
+        System.out.println("Digite o CPF do cliente: ");
+        String cpf = leitura.nextLine();
+
+        System.out.println("Digite o telefone do cliente: ");
+        String telefone = leitura.nextLine();
+
+        Clientes novoCliente = new Clientes(0, nome, 0, 0);
+        clientesRepository.adicionarCliente(novoCliente);
+
+        return novoCliente;
+    }
     public void listarTodosClientes(){
         Clientes clientes = new Clientes(0, "", 0, 0);
         List<Clientes> listaClientes = clientesRepository.listarTodosClientes();

@@ -6,43 +6,39 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 
-import com.projetohotel.hotel.model.Clientes;
-import com.projetohotel.hotel.model.Funcionarios;
 import com.projetohotel.hotel.model.Quartos;
 import com.projetohotel.hotel.repository.QuartosRepository;
 
-public class QuartosController{
+
+public class QuartosController {
     private final QuartosRepository quartosRepository;
 
-    public QuartosController(QuartosRepository quartosRepository){
+    public QuartosController(QuartosRepository quartosRepository) {
         this.quartosRepository = quartosRepository;
     }
 
-    public void adicionarTipoQuarto() {
+    public Quartos adicionarTipoQuarto() {
         Scanner leitura = new Scanner(System.in);
-        QuartosRepository.quartoEscolhido();
-        try {
-            System.out.println("Digite o tipo do quarto escolhido: ");
-            String tipoQuarto = leitura.nextLine();
+        System.out.println("Digite o tipo do quarto: ");
+        String tipo = leitura.nextLine();
 
-            System.out.println("Digite o numero do quarto desejado: ");
-            int numeroQuarto = leitura.nextInt();
+        System.out.println("Digite o número do quarto: ");
+        int numeroQuarto = leitura.nextInt();
+        if (quartosRepository.verificarNumeroQuartoExistente(numeroQuarto)) {
+            System.out.println("O número do quarto já existe. Por favor, escolha outro número.");
+            return null; 
+        }
 
-            leitura.nextLine();
-            
-            System.out.println("Atualize o status (livre/ocupado): ");
-            String statusQuarto = leitura.nextLine();
+        System.out.println("Digite o status do quarto: ");
+        String status = leitura.nextLine();
 
-            Quartos novoQuarto = new Quartos(0, tipoQuarto, numeroQuarto, statusQuarto );
-            quartosRepository.adicionarTipoQuarto(novoQuarto);
+        Quartos novoQuarto = new Quartos(0, tipo, numeroQuarto, status);
+        quartosRepository.adicionarTipoQuarto(novoQuarto);
 
-        } catch (NoSuchElementException e) {
-            System.out.println("Entrada inválida, tente novamente.");
-            e.printStackTrace();}
+        return novoQuarto;
     }
-
     public void listarTodosQuartos(){
-        Quartos quarto = new Quartos (0,"", 0, "");
+        Quartos quarto = new Quartos (0,"",0, "");
         List<Quartos> listaQuartos = quartosRepository.listarTodosQuartos();
         for (Quartos quartos : listaQuartos) {
             System.out.println("Id: " + quartos.getIdQuarto());

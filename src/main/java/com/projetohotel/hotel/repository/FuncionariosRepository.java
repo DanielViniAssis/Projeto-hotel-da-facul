@@ -20,7 +20,7 @@ public class FuncionariosRepository implements Interfacefuncionarios {
         
         try (Connection conexao = DatabaseConnection.getConnection();
             PreparedStatement statement = conexao.prepareStatement(sql)) {
-            statement.setString(1, funcionario.getNome());
+            statement.setString(1, funcionario.getNomeFuncionario());
             statement.setString(2, funcionario.getCargo());
     
             int rowsAffected = statement.executeUpdate();
@@ -92,7 +92,7 @@ public class FuncionariosRepository implements Interfacefuncionarios {
         try (Connection conexao = DatabaseConnection.getConnection();
             PreparedStatement statement = conexao.prepareStatement(sql)) {
 
-                statement.setString(1, funcionario.getNome());
+                statement.setString(1, funcionario.getNomeFuncionario());
         
                 int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {

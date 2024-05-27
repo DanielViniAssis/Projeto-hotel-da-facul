@@ -15,13 +15,13 @@ public class QuartosRepository implements InterfaceQuartos{
 
     @Override
     public void adicionarTipoQuarto(Quartos quarto) {
-        String sql = "INSERT INTO quartos (id_quarto, tipo_quarto, numero_quarto, status_quarto) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO quartos (tipo_quarto, numero_quarto, status_quarto) VALUES (?, ?, ?)";
         
         try (Connection conexao = DatabaseConnection.getConnection();
             PreparedStatement statement = conexao.prepareStatement(sql)) {
             statement.setString(1, quarto.getTipo());
-            statement.setInt(1, quarto.getNumeroQuarto());
-            statement.setString(2, quarto.getStatus());
+            statement.setInt(2, quarto.getNumeroQuarto());
+            statement.setString(3, quarto.getStatus());
     
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
@@ -33,6 +33,23 @@ public class QuartosRepository implements InterfaceQuartos{
             e.printStackTrace();
         }
     }
+    public boolean verificarNumeroQuartoExistente(int numeroQuarto) {
+        String sql = "SELECT COUNT(*) FROM quartos WHERE numero_quarto = ?";
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)){
+                statement.setInt(1, numeroQuarto);
+                try (ResultSet resultSet = statement.executeQuery()){
+                    if (resultSet.next()){
+                        int count = resultSet.getInt(1);
+                        return count > 0;
+                    }
+                }
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+        return false;
+    }
+    
     @Override
     public List<Quartos> listarTodosQuartos(){
         List<Quartos> listaQuartos = new ArrayList<>();

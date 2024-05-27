@@ -16,7 +16,7 @@ public class FuncionariosController {
         this.funcionariosRepository = funcionariosRepository;
     }
 
-    public void adicionarFuncionario() {
+    public Funcionarios adicionarFuncionario() {
         Scanner leitura = new Scanner(System.in);
         try {
             System.out.println("Digite o seu nome: ");
@@ -27,18 +27,20 @@ public class FuncionariosController {
 
             Funcionarios novoFuncionario = new Funcionarios(0, nome, cargo );
             funcionariosRepository.adicionarFuncionario(novoFuncionario);
-
+            
+            return novoFuncionario;
         } catch (NoSuchElementException e) {
             System.out.println("Entrada inválida, tente novamente.");
-            e.printStackTrace();}
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void listarTodosFuncionarios(){
-        Funcionarios funcionarios = new Funcionarios(0, "", "");
         List<Funcionarios> listaFuncionarios = funcionariosRepository.listarTodosFuncionarios();
         for (Funcionarios funcionario : listaFuncionarios) {
             System.out.println("Id: " + funcionario.getIdFuncionario());
-            System.out.println("Nome: " + funcionario.getNome());
+            System.out.println("Nome: " + funcionario.getNomeFuncionario());
             System.out.println("Cargo: " + funcionario.getCargo());
             System.out.println("-------------------------");
         }
@@ -53,7 +55,7 @@ public class FuncionariosController {
        if (funcionarioEncontrado != null){
         System.out.println("Funcionario Encontrado:");
         System.out.println("ID: " + funcionarioEncontrado.getIdFuncionario());
-        System.out.println("Nome: " + funcionarioEncontrado.getNome());
+        System.out.println("Nome: " + funcionarioEncontrado.getNomeFuncionario());
         System.out.println("Cargo: " + funcionarioEncontrado.getCargo());
        }else{
         System.out.println("Funcionario não encontrado");

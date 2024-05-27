@@ -5,9 +5,9 @@ public class Clientes  {
     private int idCliente;
     private String nome;
     private int cpf;
-    private int telefone;
+    private  int telefone;
     
-    public Clientes(int idCliente, String nome, int cpf, int telefone){
+    public Clientes(int idCliente, String nome,  int cpf,  int telefone){
         this.idCliente = idCliente;
         this.nome = nome;
         this.cpf = cpf;
