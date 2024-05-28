@@ -19,18 +19,19 @@ public class ClientesController {
         Scanner leitura = new Scanner(System.in);
         System.out.println("Digite o nome do cliente: ");
         String nome = leitura.nextLine();
-
+    
         System.out.println("Digite o CPF do cliente: ");
-        String cpf = leitura.nextLine();
-
+        int cpf = leitura.nextInt();
+    
         System.out.println("Digite o telefone do cliente: ");
-        String telefone = leitura.nextLine();
-
-        Clientes novoCliente = new Clientes(0, nome, 0, 0);
+        int telefone = leitura.nextInt();
+    
+        Clientes novoCliente = new Clientes(0, nome, cpf, telefone);
         clientesRepository.adicionarCliente(novoCliente);
-
+    
         return novoCliente;
     }
+    
     public void listarTodosClientes(){
         Clientes clientes = new Clientes(0, "", 0, 0);
         List<Clientes> listaClientes = clientesRepository.listarTodosClientes();

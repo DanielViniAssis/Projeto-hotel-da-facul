@@ -51,6 +51,8 @@ public class ReservaController {
             System.err.println("Erro ao cadastrar cliente.");
             return;
         }
+        
+        QuartosRepository.quartoEscolhido();
         // Reserva do quarto
         System.out.println("Reserva do quarto");
         Quartos novoQuarto = quartosController.adicionarTipoQuarto();
@@ -71,8 +73,9 @@ public class ReservaController {
 
         Reserva novaReserva = new Reserva(
             0, novoCliente, novoQuarto, dataEntrada, dataSaida, novoFuncionario, novoFuncionario, statusReserva
-        );
-            reservaRepository.adicionarReserva(novaReserva, novoFuncionario);
+        ); novaReserva.setCliente(novoCliente);
+            reservaRepository.adicionarReserva(novaReserva, novoFuncionario, novoCliente, novoQuarto);
         
     }
+    
 }

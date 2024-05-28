@@ -22,21 +22,28 @@ public class QuartosController {
         System.out.println("Digite o tipo do quarto: ");
         String tipo = leitura.nextLine();
 
-        System.out.println("Digite o número do quarto: ");
-        int numeroQuarto = leitura.nextInt();
-        if (quartosRepository.verificarNumeroQuartoExistente(numeroQuarto)) {
-            System.out.println("O número do quarto já existe. Por favor, escolha outro número.");
-            return null; 
-        }
+        int numeroQuarto = 0;
+        boolean numeroQuartoValido = false;
+        do {
+            System.out.println("Digite o número do quarto: ");
+            numeroQuarto = leitura.nextInt();
+            leitura.nextLine();
 
-        System.out.println("Digite o status do quarto: ");
+            if (quartosRepository.verificarNumeroQuartoExistente(numeroQuarto)) {
+                System.out.println("Número do quarto já existe! Por favor, insira um número diferente.");
+            } else {
+                numeroQuartoValido = true;
+            }
+        } while (!numeroQuartoValido);
+
+        System.out.println("Digite o status do quarto (Ocupado/Desocupado): ");
         String status = leitura.nextLine();
 
         Quartos novoQuarto = new Quartos(0, tipo, numeroQuarto, status);
         quartosRepository.adicionarTipoQuarto(novoQuarto);
-
         return novoQuarto;
     }
+
     public void listarTodosQuartos(){
         Quartos quarto = new Quartos (0,"",0, "");
         List<Quartos> listaQuartos = quartosRepository.listarTodosQuartos();
@@ -75,7 +82,7 @@ public class QuartosController {
 
           Quartos quarto =  quartosRepository.encontrarQuartoPorNumero(numeroQuarto);
           if(quarto != null){
-            quartosRepository.removerQuartos(quarto);
+            quartosRepository.removerQuarto(numeroQuarto);
           }else{
             System.out.println("Quarto não encontrado!");
           }
@@ -84,5 +91,6 @@ public class QuartosController {
         e.printStackTrace();
         } 
     }
+    
     
 }

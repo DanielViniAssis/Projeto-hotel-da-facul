@@ -33,8 +33,7 @@ public class HotelMenu {
             System.out.println("2. Opções dos Quartos");
             System.out.println("3. Opções dos Funcionarios");
             System.out.println("4. Opções das Reservas");
-            System.out.println("5. Voltar um Menu");
-            System.out.println("6. Sair");
+            System.out.println("5. Sair");
             System.out.print("Escolha uma opção: ");
             while (!leitura.hasNextInt()) {
                 System.out.println("Opção inválida. Tente novamente.");
@@ -47,7 +46,7 @@ public class HotelMenu {
                     menuCliente(leitura, clientesController);
                     break;
                 case 2:
-                    // Adicione lógica para opções dos Quartos
+                    menuQuarto(leitura, quartosController);
                     break;
                 case 3:
                     areaFuncionario(funcionariosController, reservaController, leitura);
@@ -56,17 +55,13 @@ public class HotelMenu {
                     menuReservas(reservaController, leitura);
                     break;
                 case 5:
-                    System.out.println("Voltando....");
-                    // Adicione lógica para voltar um menu, se necessário
-                    break;
-                case 6:
                     System.out.println("Saindo...");
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
                     break;
             }
-        } while (opcaoMenu != 6);
+        } while (opcaoMenu != 5);
         leitura.close();
     }
 
@@ -78,8 +73,8 @@ public class HotelMenu {
             System.out.println("2. Listar todos os funcionario");
             System.out.println("3. Buscar funcionario");
             System.out.println("4. Remover funcionario");
-            System.out.println("5. Fazer reservas");
-            System.out.println("6. Entrar no menu de reservas");
+            System.out.println("5. Entrar no menu de reservas");
+            System.out.println("6. Voltar um menu");
             System.out.println("Escolha a opção: ");
 
             opcaoFuncionario = leitura.nextInt();
@@ -98,9 +93,6 @@ public class HotelMenu {
                     funcionariosController.removerFuncionario();
                     break;
                 case 5:
-                    reservaController.reservaFeita();
-                    break;
-                case 6:
                     menuReservas(reservaController, leitura);
                     break;
             }
@@ -114,7 +106,7 @@ public class HotelMenu {
             System.out.println("1. Listar Todos os Clientes");
             System.out.println("2. Remover Cliente");
             System.out.println("3. Encontrar Cliente por ID");
-            System.out.println("4. Voltar Um Menu");
+            System.out.println("4. Voltar para o menu do hotel");
             System.out.print("Escolha uma opção: ");
 
             opcaoCliente = leitura.nextInt();
@@ -140,6 +132,7 @@ public class HotelMenu {
             System.out.println("----------Menu Reservas----------");
             System.out.println("1. Fazer Reserva");
             System.out.println("2. Listar Reservas");
+            System.out.println("3. Voltar para o menu do hotel");
 
             opcaoReserva = leitura.nextInt();
             leitura.nextLine();
@@ -154,4 +147,32 @@ public class HotelMenu {
             }
         } while (opcaoReserva != 3);
     }
+
+    public static void menuQuarto(Scanner leitura, QuartosController quartosController) {
+        int opcaoCliente;
+        do {
+            System.out.println("-------------Menu Quartos-------------");
+            System.out.println("1. Listar Todos os Quartos");
+            System.out.println("2. Remover Quarto");
+            System.out.println("3. Encontrar Quarto por numero");
+            System.out.println("4. Voltar para o menu do hotel");
+            System.out.print("Escolha uma opção: ");
+
+            opcaoCliente = leitura.nextInt();
+            leitura.nextLine();
+
+            switch (opcaoCliente) {
+                case 1:
+                    quartosController.listarTodosQuartos();
+                    break;
+                case 2:
+                    quartosController.removerQuarto();
+                    break;
+                case 3:
+                    quartosController.encontrarQuartoPorNumero();
+                    break;
+            }
+        } while (opcaoCliente != 4);
+    }
+
 }

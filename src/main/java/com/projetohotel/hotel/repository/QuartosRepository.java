@@ -33,20 +33,18 @@ public class QuartosRepository implements InterfaceQuartos{
             e.printStackTrace();
         }
     }
+
     public boolean verificarNumeroQuartoExistente(int numeroQuarto) {
-        String sql = "SELECT COUNT(*) FROM quartos WHERE numero_quarto = ?";
-        try(Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)){
-                statement.setInt(1, numeroQuarto);
-                try (ResultSet resultSet = statement.executeQuery()){
-                    if (resultSet.next()){
-                        int count = resultSet.getInt(1);
-                        return count > 0;
-                    }
-                }
-            }catch(SQLException e){
-                e.printStackTrace();
+        String sql = "SELECT 1 FROM quartos WHERE numero_quarto = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, numeroQuarto);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
     
@@ -100,26 +98,48 @@ public class QuartosRepository implements InterfaceQuartos{
         } 
         return quarto;
     }
-    @Override
-    public void removerQuartos(Quartos quarto){
+  
+    public void removerQuarto(int numeroQuarto) {
+        if (reservasRelacionadasExistem(numeroQuarto)) {
+            System.out.println("Existem reservas relacionadas a este quarto. Remova as reservas antes de excluir o quarto.");
+            return;
+        }
         String sql = "DELETE FROM quartos WHERE numero_quarto = ?";
-        
-        try (Connection conexao = DatabaseConnection.getConnection();
-            PreparedStatement statement = conexao.prepareStatement(sql)) {
-    
-                statement.setInt(1, quarto.getNumeroQuarto());
-        
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, numeroQuarto);
             int rowsAffected = statement.executeUpdate();
+
             if (rowsAffected > 0) {
                 System.out.println("Quarto removido com sucesso!");
             } else {
                 System.out.println("Falha ao remover o quarto ou quarto não encontrado.");
             }
         } catch (SQLException e) {
-            System.err.println("Erro ao tentar remover quarto: " + e.getMessage());
+            System.err.println("Erro ao tentar remover quarto: ");
             e.printStackTrace();
         }
     }
+
+    private boolean reservasRelacionadasExistem(int numeroQuarto) {
+        String sql = "SELECT COUNT(*) FROM reserva WHERE numero_quarto = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, numeroQuarto);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     public static void quartoEscolhido(){
         List<String>quartoEscolhido = new ArrayList<>();
@@ -130,4 +150,6 @@ public class QuartosRepository implements InterfaceQuartos{
         quartoEscolhido.add("\n Tipo do Quarto: deluxe solteiro - Quarto Numero: 05");
         System.out.println(quartoEscolhido);
     }
+
+    
 }

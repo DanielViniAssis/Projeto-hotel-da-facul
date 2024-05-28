@@ -1,36 +1,42 @@
 package com.projetohotel.hotel.model;
 
-public class Funcionarios{
+public class Funcionarios {
     private int idFuncionario;
     private String nomeFuncionario;
     private String cargo;
-    
-    public Funcionarios(int idFuncionario, String nomeFuncionario, String cargo){
+
+    public Funcionarios() {
+    }
+
+    public Funcionarios(int idFuncionario, String nomeFuncionario, String cargo) {
         this.idFuncionario = idFuncionario;
         this.nomeFuncionario = nomeFuncionario;
         this.cargo = cargo;
     }
-// getters
-    public int getIdFuncionario(){
+
+	// Getters
+    public int getIdFuncionario() {
         return idFuncionario;
     }
-    public String getNomeFuncionario(){
+
+    public String getNomeFuncionario() {
         return nomeFuncionario;
     }
-    
-    public String getCargo(){
+
+    public String getCargo() {
         return cargo;
     }
-    
-//set para editar dados
-    public void setIdFuncionario(int idFuncionario){
+
+    // Setters
+    public void setIdFuncionario(int idFuncionario) {
         this.idFuncionario = idFuncionario;
     }
-    public void setNome(String nomeFuncionario){
+
+    public void setNome(String nomeFuncionario) {
         this.nomeFuncionario = nomeFuncionario;
     }
 
-    public void setCargo(String cargo){
+    public void setCargo(String cargo) {
         this.cargo = cargo;
     }
 }

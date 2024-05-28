@@ -28,6 +28,5 @@ public interface InterfaceHotel {
          void adicionarTipoQuarto(Quartos quarto);
         List<Quartos> listarTodosQuartos();
         Quartos encontrarQuartoPorNumero(int numeroQuarto);
-        void removerQuartos(Quartos quarto);
     }
 }
