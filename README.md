@@ -15,7 +15,7 @@ Este é um projeto de gerenciamento de reservas desenvolvido em Java, seguindo a
 - Model: Responsável pela lógica de negócios e pela comunicação com o banco de dados.
 - View: Interface do usuário, desenvolvida com SpringCLI para apenas rodar no terminal do VsCode.
 - Controller: Responsável por receber as requisições do usuário, interagir com o model e atualizar a view.
-- Tecnologias Utilizadas
+## Tecnologias Utilizadas
 - Linguagem: Java 19
 - Framework: SpringCLI.
 - Banco de Dados: PostgreSQL
