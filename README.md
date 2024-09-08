@@ -6,6 +6,7 @@ Este é um projeto de gerenciamento de reservas desenvolvido em Java, seguindo a
 ## Funcionalidades Principais
 - Cadastro de funcionário: Permite adicionar, editar e remover o funcionário.
 - Visualização das reservas: Exibe uma lista completa das reservas cadastradas.
+- Gerenciamento dos Quartos: Permite adicionar, editar e remover um quarto e listar os quartos.
 
 ## Arquitetura
 ### Este projeto segue o padrão MVC (Model-View-Controller):
