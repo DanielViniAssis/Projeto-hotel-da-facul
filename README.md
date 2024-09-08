@@ -4,8 +4,9 @@
 Este é um projeto de gerenciamento de reservas desenvolvido em Java, seguindo a arquitetura MVC (Model-View-Controller) e utilizando o banco de dados PostgreSQL. O sistema permite que o funcionario crie novas reservas, inserindo os dados do cliente, atualizando todas as informações do cliente e da reserva, deletando as informações tanto da reserva como do cliente e realizar o gerenciamento dos quartos como verificar e atualizar a disponibilidade.
 
 ## Funcionalidades Principais
-- Cadastro de funcionário: Permite adicionar, editar e remover o funcionário.
-- Visualização das reservas: Exibe uma lista completa das reservas cadastradas.
+- Cadastro de funcionário: Permite adicionar, editar, remover e listar os funcionários.
+- Cadastrar hóspedes: Permite Adicionar, editar, remover e listar as informações dos hóspedes.
+- Gerenciamento das reservas: Permite listar e realizar a edição, a criação e a deleção de informações da reserva.
 - Gerenciamento dos Quartos: Permite adicionar, editar e remover um quarto e listar os quartos.
 
 ## Arquitetura
